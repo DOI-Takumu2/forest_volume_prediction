@@ -14,7 +14,7 @@ st.markdown("""
     <p style="margin-top: 5px; font-size: 18px;">森林管理と将来予測のためのツール</p>
     <p style="font-size: 12px; color: gray;">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
 </div>
-<div style="text-align: right; font-size: 14px; margin-top: -15px; font-weight: bold;">
+<div style="text-align: right; font-size: 16px; margin-top: -10px; font-weight: bold;">
     製作者: 土居拓務（DOI, Takumu）
 </div>
 <hr style="margin-top: 10px;">
@@ -23,35 +23,52 @@ st.markdown("""
 # モデル概要を緑色の背景で強調表示
 st.markdown("""
 <div style="background-color: #dfffdf; padding: 10px; border-radius: 5px; line-height: 1.8;">
-<b>このアプリは以下の2つのモデルを用いて森林蓄積量を予測します:</b><br>
-1. <span style="font-weight: bold;">ロジスティック成長モデル</span>: 成長が一定の飽和点に収束する性質を持つモデル。<br>
-   - 初期成長が速く、徐々に成長率が低下し、最終的に飽和点に収束します。  
-   - 長期的な森林成長パターンを捉えるのに適しています。  
-   - 成長率 (r)、飽和点 (K)、初期条件 (A) を計算します。
-<br>
-2. <span style="font-weight: bold;">多項式モデル</span>: 年齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。<br>
-   - シンプルな成長パターンを捉えつつ、非負制約で不自然な値を防ぎます。  
-   - 短期的な予測や直線的な増加パターンのモデリングに適しています。  
-   - 係数 (a, b, c) を基に曲線を近似します。
+<b>このアプリは以下の2つのモデルを用いて森林蓄積量を予測します:</b>
+<ol>
+    <li>
+        <b>ロジスティック成長モデル</b>: 成長が一定の飽和点に収束する性質を持つモデル。<br>
+        <ul>
+            <li>初期成長が速く、徐々に成長率が低下し、最終的に飽和点に収束します。</li>
+            <li>長期的な森林成長パターンを捉えるのに適しています。</li>
+            <li>成長率 (r)、飽和点 (K)、初期条件 (A) を計算します。</li>
+        </ul>
+    </li>
+    <li>
+        <b>多項式モデル</b>: 年齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。<br>
+        <ul>
+            <li>シンプルな成長パターンを捉えつつ、非負制約で不自然な値を防ぎます。</li>
+            <li>短期的な予測や直線的な増加パターンのモデリングに適しています。</li>
+            <li>係数 (a, b, c) を基に曲線を近似します。</li>
+        </ul>
+    </li>
+</ol>
 </div>
 """, unsafe_allow_html=True)
 
 # 使用手順を黒線で囲む
 st.markdown("""
 <div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
-<b>使用手順:</b><br>
-1. <span style="font-weight: bold;">データ準備</span>: 森林データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）で準備してください。<br>
-   - <code>forest_age</code>: 森林の年齢（年単位）<br>
-   - <code>volume_per_ha</code>: 1ヘクタールあたりの蓄積量（m³）<br>
-2. <span style="font-weight: bold;">ファイルアップロード</span>: アプリのアップロード機能を使用してファイルを読み込みます。<br>
-3. <span style="font-weight: bold;">モデル選択</span>: ロジスティック成長モデルまたは多項式モデルを選択します。<br>
-4. <span style="font-weight: bold;">結果確認</span>: 以下の内容が表示されます:<br>
-   - <span style="font-weight: bold;">フィッティングされた数式</span>: データに基づく予測モデルの具体的な数式<br>
-   - <span style="font-weight: bold;">適合度（R²値）</span>: モデルがデータにどれだけ適合しているかを示す指標<br>
-   - <span style="font-weight: bold;">信用区間</span>: 信頼性の高い予測範囲（90%）を提示<br>
-   - <span style="font-weight: bold;">異常値の検出と修正</span>: 異常値が検出された場合、自動で修正します<br>
-   - <span style="font-weight: bold;">グラフ</span>: 観測データ、予測曲線、信用区間を視覚化します<br>
-5. <span style="font-weight: bold;">データ保存</span>: 予測結果をCSV形式でダウンロード可能です。
+<b>使用手順:</b>
+<ol>
+    <li><b>データ準備</b>: 森林データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）で準備してください。
+        <ul>
+            <li><code>forest_age</code>: 森林の年齢（年単位）</li>
+            <li><code>volume_per_ha</code>: 1ヘクタールあたりの蓄積量（m³）</li>
+        </ul>
+    </li>
+    <li><b>ファイルアップロード</b>: アプリのアップロード機能を使用してファイルを読み込みます。</li>
+    <li><b>モデル選択</b>: ロジスティック成長モデルまたは多項式モデルを選択します。</li>
+    <li><b>結果確認</b>: 以下の内容が表示されます:
+        <ul>
+            <li><b>フィッティングされた数式</b>: データに基づく予測モデルの具体的な数式</li>
+            <li><b>適合度（R²値）</b>: モデルがデータにどれだけ適合しているかを示す指標</li>
+            <li><b>信用区間</b>: 信頼性の高い予測範囲（90%）を提示</li>
+            <li><b>異常値の検出と修正</b>: 異常値が検出された場合、自動で修正します</li>
+            <li><b>グラフ</b>: 観測データ、予測曲線、信用区間を視覚化します</li>
+        </ul>
+    </li>
+    <li><b>データ保存</b>: 予測結果をCSV形式でダウンロード可能です。</li>
+</ol>
 </div>
 """, unsafe_allow_html=True)
 
@@ -61,7 +78,6 @@ st.markdown("""
 **引用:**
 DOI, Takumu (2024). *Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting*.
 """, unsafe_allow_html=True)
-
 
 # ロジスティック成長モデル
 def logistic_growth(age, K, r, A):
