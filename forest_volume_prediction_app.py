@@ -99,8 +99,7 @@ def calculate_credible_interval(model, params, ages, forest_age_max, volume_max,
     upper_90 = np.percentile(predicted_samples, 95, axis=0)
     return lower_90, upper_90
 
-# ファイルアップロード
-uploaded_file = st.file_uploader("Excelファイルをアップロードしてください（拡張子: .xlsx）", type=["xlsx"])
+# モデルフィッティング後の処理
 if uploaded_file:
     data = pd.read_excel(uploaded_file)
     st.write("アップロードされたデータ:")
@@ -120,13 +119,14 @@ if uploaded_file:
 
     # モデルフィッティング
     ages = np.arange(1, max(forest_age) + 1)  # 整数刻みに変更
+    equation = ""
     if model_choice == "ロジスティック成長モデル (Logistic Growth Model)":
         initial_guess = [1, 0.1, 1]
         popt, pcov = curve_fit(logistic_growth, forest_age_scaled, volume_per_ha_scaled, p0=initial_guess, maxfev=10000)
         K, r, A = popt
         K = K * max(volume_per_ha)  # 元スケールに戻す
         fitted_values = logistic_growth(forest_age_scaled, *popt) * max(volume_per_ha)
-        equation = f"Volume = {K:.2f} / (1 + {A:.2f} * exp(-{r:.4f} * Age))"
+        equation = r"V = \frac{{K}}{{1 + A \cdot e^{-r \cdot \text{Age}}}}"
         lower_90, upper_90 = calculate_credible_interval(logistic_growth, popt, ages, max(forest_age), max(volume_per_ha), pcov)
     else:
         initial_guess = [1, 1, 1]
@@ -136,29 +136,26 @@ if uploaded_file:
         b = b * (max(volume_per_ha) / max(forest_age))
         c = c * max(volume_per_ha)
         fitted_values = polynomial_model(forest_age_scaled, *popt) * max(volume_per_ha)
-        equation = f"Volume = max(0, {a:.2f} * Age² + {b:.2f} * Age + {c:.2f})"
+        equation = r"V = \max\left(0, a \cdot \text{Age}^2 + b \cdot \text{Age} + c\right)"
         lower_90, upper_90 = calculate_credible_interval(polynomial_model, popt, ages, max(forest_age), max(volume_per_ha), pcov)
 
     # 数式をLaTeX形式で表示する
-if model_choice == "ロジスティック成長モデル (Logistic Growth Model)":
     st.markdown("**数式:**")
-    st.latex(r"V = \frac{{K}}{{1 + A \cdot e^{-r \cdot \text{Age}}}}")
-    st.write(f"**係数:** K = {K:.2f}, r = {r:.4f}, A = {A:.2f}")
-else:
-    st.markdown("**数式:**")
-    st.latex(r"V = \max\left(0, a \cdot \text{Age}^2 + b \cdot \text{Age} + c\right)")
-    st.write(f"**係数:** a = {a:.2f}, b = {b:.2f}, c = {c:.2f}")
-    
+    st.latex(equation)
+    if model_choice == "ロジスティック成長モデル (Logistic Growth Model)":
+        st.write(f"**係数:** K = {K:.2f}, r = {r:.4f}, A = {A:.2f}")
+    else:
+        st.write(f"**係数:** a = {a:.2f}, b = {b:.2f}, c = {c:.2f}")
+
     # 結果表示
     st.write("### フィッティング結果")
-    st.write(f"**数式:** {equation}")
     st.write(f"**適合度 (R²):** {r2_score(volume_per_ha, fitted_values):.4f}")
 
     # グラフ表示
     st.write("### グラフ")
     fig, ax = plt.subplots()
-    ax.scatter(forest_age, volume_per_ha, label="Observed Data", color="blue")
     predicted_volume_formula = logistic_growth(ages / max(forest_age), *popt) * max(volume_per_ha) if model_choice == "ロジスティック成長モデル (Logistic Growth Model)" else polynomial_model(ages / max(forest_age), *popt) * max(volume_per_ha)
+    ax.scatter(forest_age, volume_per_ha, label="Observed Data", color="blue")
     ax.plot(ages, predicted_volume_formula, label="Predicted", color="red")
     ax.fill_between(ages, lower_90, upper_90, color="orange", alpha=0.3, label="90% Credible Interval")
     ax.set_xlabel("Forest Age (years)")
