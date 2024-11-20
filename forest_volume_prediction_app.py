@@ -76,7 +76,7 @@ if uploaded_file:
     volume_per_ha_scaled = volume_per_ha / max(volume_per_ha)
 
     # モデルフィッティング
-    ages = np.linspace(1, max(forest_age), 100)
+    ages = np.arange(1, max(forest_age) + 1)  # 整数刻みに変更
     if model_choice == "ロジスティック成長モデル (Logistic Growth Model)":
         initial_guess = [1, 0.1, 1]
         popt, pcov = curve_fit(logistic_growth, forest_age_scaled, volume_per_ha_scaled, p0=initial_guess, maxfev=10000)
@@ -104,23 +104,23 @@ if uploaded_file:
     # グラフ表示
     st.write("### グラフ")
     fig, ax = plt.subplots()
-    ax.scatter(forest_age, volume_per_ha, label="観測データ (Observed Data)", color="blue")
+    ax.scatter(forest_age, volume_per_ha, label="Observed Data", color="blue")
     predicted_volume_formula = logistic_growth(ages / max(forest_age), *popt) * max(volume_per_ha) if model_choice == "ロジスティック成長モデル (Logistic Growth Model)" else polynomial_model(ages / max(forest_age), *popt) * max(volume_per_ha)
-    ax.plot(ages, predicted_volume_formula, label="予測値 (Predicted)", color="red")
-    ax.fill_between(ages, lower_90, upper_90, color="orange", alpha=0.3, label="90% 信用区間")
-    ax.set_xlabel("林齢 (Forest Age, years)")
-    ax.set_ylabel("材積 (Volume per ha, m³)")
+    ax.plot(ages, predicted_volume_formula, label="Predicted", color="red")
+    ax.fill_between(ages, lower_90, upper_90, color="orange", alpha=0.3, label="90% Credible Interval")
+    ax.set_xlabel("Forest Age (years)")
+    ax.set_ylabel("Volume per ha (m³)")
     ax.legend()
     st.pyplot(fig)
 
     # 結果を保存
     predictions_df = pd.DataFrame({
         "Forest Age": ages,
-        "Predicted Volume (数式に基づく計算)": predicted_volume_formula,
+        "Predicted Volume (Formula)": predicted_volume_formula,
         "Lower 90% CI": lower_90,
         "Upper 90% CI": upper_90
     })
     st.write("### 予測結果のダウンロード")
     st.write(predictions_df)
     csv = predictions_df.to_csv(index=False).encode('utf-8-sig')
-    st.download_button(label="結果をCSVでダウンロード", data=csv, file_name="Predicted_Volume.csv", mime="text/csv")
+    st.download_button(label="Download Results as CSV", data=csv, file_name="Predicted_Volume.csv", mime="text/csv")
