@@ -20,10 +20,8 @@ st.markdown("""
 
 # モデル概要を緑色の背景で表示
 st.markdown("""
-<div style="background-color: #dfffdf; padding: 10px; border-radius: 5px; line-height: 1.8;">
-<b>このアプリは以下の2つのモデルを用いて森林蓄積量を予測します:</b>
-</div>
-""", unsafe_allow_html=True)
+**このアプリは以下2つのモデルを用いて森林蓄積量を予測します:**
+""")
 
 # ロジスティック成長モデルの詳細
 with st.expander("1. ロジスティック成長モデル"):
