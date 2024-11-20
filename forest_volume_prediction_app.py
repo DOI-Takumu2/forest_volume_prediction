@@ -49,18 +49,17 @@ st.markdown("""
 <div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
 <b>使用手順:</b><br>
 1. <span style="font-weight: bold;">データ準備:</span><br>
-   Excelファイル（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）をご準備ください。<br>
-   &emsp;<code>forest_age</code>: 森林の年齢（年単位）<br>
-   &emsp;<code>volume_per_ha</code>: 1ヘクタールあたりの蓄積量（m³）<br>
-2. <span style="font-weight: bold;">ファイルアップロード</span>: アプリのアップロード機能を使用してファイルを読み込みます。<br>
-3. <span style="font-weight: bold;">モデル選択</span>: ロジスティック成長モデルまたは多項式モデルを選択します。<br>
-4. <span style="font-weight: bold;">結果確認</span>: 以下の内容が表示されます:<br>
-   &emsp;<span style="font-weight: bold;">フィッティングされた数式</span>: データに基づく予測モデルの具体的な数式<br>
-   &emsp;<span style="font-weight: bold;">適合度（R²値）</span>: モデルがデータにどれだけ適合しているかを示す指標<br>
+   Excelファイル（列名は必ず <code>forest_age</code> と <code>volume_per_ha</code> ）をご準備ください。<br>
+   &emsp;<code>forest_age</code>: 林齢（樹木の年齢）（年単位）<br>
+   &emsp;<code>volume_per_ha</code>: 1haあたりの蓄積量（m³）<br>
+2. <span style="font-weight: bold;">ファイルアップロード</span><br>
+3. <span style="font-weight: bold;">モデル選択</span><br>
+4. <span style="font-weight: bold;">結果確認</span><br>
+   &emsp;<span style="font-weight: bold;">予測モデルの数式</span><br>
+   &emsp;<span style="font-weight: bold;">適合度（R²値）</span>: モデルとデータの適合指標<br>
    &emsp;<span style="font-weight: bold;">信用区間</span>: 信頼性の高い予測範囲（90%）を提示<br>
-   &emsp;<span style="font-weight: bold;">異常値の検出と修正</span>: 異常値が検出された場合、自動で修正します<br>
-   &emsp;<span style="font-weight: bold;">グラフ</span>: 観測データ、予測曲線、信用区間を視覚化します<br>
-5. <span style="font-weight: bold;">データ保存</span>: 予測結果をCSV形式でダウンロード可能です。
+   &emsp;<span style="font-weight: bold;">異常値の検出・修正</span>: 異常値は自動修正<br>
+   &emsp;<span style="font-weight: bold;">グラフ</span>: 観測データ、予測曲線、信用区間を表示<br>
 </div>
 """, unsafe_allow_html=True)
 
