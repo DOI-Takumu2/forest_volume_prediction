@@ -10,16 +10,21 @@ import streamlit as st
 
 # Streamlitページの設定
 st.title("森林蓄積予測アプリ")
-st.subheader("森林管理と将来予測のためのツール")
-st.write("""
-Forest Volume Prediction App  
-A tool for sustainable forest management and growth forecasting.
-""")
 
+# タイトルとキャッチフレーズを横並びに配置
 st.markdown("""
-### **作成者**  
-土居拓務（DOI, Takumu）
-""")
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 style="margin: 0;">Forest Volume Prediction App</h1>
+    <p style="margin: 0; font-size: 16px;">A tool for sustainable forest management and growth forecasting.</p>
+</div>
+""", unsafe_allow_html=True)
+
+# 製作者名を右寄せ
+st.markdown("""
+<div style="text-align: right; font-size: 14px; margin-top: -20px;">
+    製作者：土居拓務（DOI, Takumu）
+</div>
+""", unsafe_allow_html=True
 
 st.write("""
 このアプリは、林齢（森林の年齢）に基づいて、1ヘクタールあたりの森林蓄積量（m³）を予測するためのツールです。主に以下の2つの予測モデルを使用します：
