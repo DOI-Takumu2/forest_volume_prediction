@@ -10,22 +10,18 @@ st.title("森林蓄積予測アプリ")
 
 import streamlit as st
 
-# Streamlitページの設定
+# Streamlitページの設定とカスタマイズ
 st.markdown("""
-<div style="display: flex; justify-content: space-between; align-items: center;">
-    <h1 style="margin: 0;">Forest Volume Prediction App</h1>
-    <p style="margin: 0; font-size: 16px;">A tool for sustainable forest management and growth forecasting.</p>
+<div style="text-align: center;">
+    <h1 style="margin-bottom: 0;">森林蓄積予測アプリ</h1>
+    <p style="margin-top: 5px; font-size: 18px;">森林管理と将来予測のためのツール</p>
+    <p style="margin-top: -5px; font-size: 14px; color: gray;">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
+</div>
+<div style="text-align: right; font-size: 12px; margin-top: -10px;">
+    製作者: 土居拓務（DOI, Takumu）
 </div>
 """, unsafe_allow_html=True)
 
-# 製作者名を右寄せ
-st.markdown("""
-<div style="text-align: right; font-size: 14px; margin-top: -10px;">
-    製作者：土居拓務（DOI, Takumu）
-</div>
-""", unsafe_allow_html=True)
-
-# アプリの概要
 st.write("""
 このアプリは、林齢（森林の年齢）に基づいて、1ヘクタールあたりの森林蓄積量（m³）を予測するためのツールです。
 主に以下の2つの予測モデルを使用します：
