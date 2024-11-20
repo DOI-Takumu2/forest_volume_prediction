@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 
 import streamlit as st
 
+import streamlit as st
+
 # アプリの基本設定
 st.markdown("""
 <div style="text-align: center;">
@@ -26,7 +28,14 @@ st.markdown("""
 <div style="background-color: #dfffdf; padding: 10px; border-radius: 5px; line-height: 1.8;">
 <b>このアプリは以下の2つのモデルを用いて森林蓄積量を予測します:</b><br>
 1. **ロジスティック成長モデル**: 成長が一定の飽和点に収束する性質を持つモデル。<br>
-2. **多項式モデル**: 年齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。
+   - 初期成長が速く、徐々に成長率が低下し、最終的に飽和点に収束します。  
+   - 長期的な森林成長パターンを捉えるのに適しています。  
+   - 成長率 (r)、飽和点 (K)、初期条件 (A) を計算します。
+<br>
+2. **多項式モデル**: 年齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。<br>
+   - シンプルな成長パターンを捉えつつ、非負制約で不自然な値を防ぎます。  
+   - 短期的な予測や直線的な増加パターンのモデリングに適しています。  
+   - 係数 (a, b, c) を基に曲線を近似します。
 </div>
 """, unsafe_allow_html=True)
 
@@ -35,9 +44,16 @@ st.markdown("""
 <div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
 <b>使用手順:</b><br>
 1. **データ準備**: 森林データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）で準備してください。<br>
+   - `forest_age`: 森林の年齢（年単位）<br>
+   - `volume_per_ha`: 1ヘクタールあたりの蓄積量（m³）<br>
 2. **ファイルアップロード**: アプリのアップロード機能を使用してファイルを読み込みます。<br>
 3. **モデル選択**: ロジスティック成長モデルまたは多項式モデルを選択します。<br>
-4. **結果確認**: フィッティングされた数式、モデルの適合度（R²値）、信用区間、異常値の修正結果を表示します。<br>
+4. **結果確認**: 以下の内容が表示されます:<br>
+   - **フィッティングされた数式**: データに基づく予測モデルの具体的な数式<br>
+   - **適合度（R²値）**: モデルがデータにどれだけ適合しているかを示す指標<br>
+   - **信用区間**: 信頼性の高い予測範囲（90%）を提示<br>
+   - **異常値の検出と修正**: 異常値が検出された場合、自動で修正します<br>
+   - **グラフ**: 観測データ、予測曲線、信用区間を視覚化します<br>
 5. **データ保存**: 予測結果をCSV形式でダウンロード可能です。
 </div>
 """, unsafe_allow_html=True)
@@ -48,6 +64,8 @@ st.markdown("""
 **引用:**
 DOI, Takumu (2024). *Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting*.
 """, unsafe_allow_html=True)
+
+
 # ロジスティック成長モデル
 def logistic_growth(age, K, r, A):
     """
