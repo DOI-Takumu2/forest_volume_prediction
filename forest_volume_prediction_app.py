@@ -49,9 +49,9 @@ st.markdown("""
 <div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
 <b>使用手順:</b><br>
 1. <span style="font-weight: bold;">データ準備:</span><br>
-   Excelファイル（列名は必ず <code>forest_age</code> と <code>volume_per_ha</code> ）をご準備ください。<br>
-   &emsp;<code>forest_age</code>: 林齢（樹木の年齢）（年単位）<br>
-   &emsp;<code>volume_per_ha</code>: 1haあたりの蓄積量（m³）<br>
+   Excelファイル（列名は <span style="font-weight: bold; color: blue;">forest_age</span> と <span style="font-weight: bold; color: blue;">volume_per_ha</span> 必須）をご準備ください。<br>
+   &emsp;<span style="font-weight: bold; color: blue;">forest_age</span>: 林齢（樹木の年齢）（年単位）<br>
+   &emsp;<span style="font-weight: bold; color: blue;">volume_per_ha</span>: 1haあたりの蓄積量（m³）<br>
 2. <span style="font-weight: bold;">ファイルアップロード</span><br>
 3. <span style="font-weight: bold;">モデル選択</span><br>
 4. <span style="font-weight: bold;">結果確認</span><br>
