@@ -7,85 +7,47 @@ import matplotlib.pyplot as plt
 
 import streamlit as st
 
-# Streamlitページの設定とカスタマイズ
+# アプリの基本設定
 st.markdown("""
-<style>
-    .app-title {
-        text-align: center;
-        margin-bottom: 0;
-        font-size: 36px;
-    }
-    .app-subtitle {
-        text-align: center;
-        margin-top: 5px;
-        font-size: 18px;
-    }
-    .app-subsubtitle {
-        text-align: center;
-        margin-top: -5px;
-        font-size: 14px;
-        color: gray;
-    }
-    .author-info {
-        text-align: right;
-        font-size: 12px;
-        margin-top: -10px;
-        color: black;
-    }
-</style>
-<div>
-    <h1 class="app-title">森林蓄積予測アプリ</h1>
-    <p class="app-subtitle">森林管理と将来予測のためのツール</p>
-    <p class="app-subsubtitle">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
+<div style="text-align: center;">
+    <h1 style="margin-bottom: 0;">🌲 森林蓄積予測アプリ</h1>
+    <p style="margin-top: 5px; font-size: 18px;">森林管理と将来予測のためのツール</p>
+    <p style="font-size: 12px; color: gray;">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
 </div>
-<div class="author-info">
-    製作者: 土居拓務（DOI, Takumu）
+<div style="text-align: right; font-size: 12px; margin-top: -15px;">
+    作成者: <strong>土居拓務（DOI, Takumu）</strong>
+</div>
+<hr style="margin-top: 10px;">
+
+""", unsafe_allow_html=True)
+
+# モデル概要を緑色の背景で強調表示
+st.markdown("""
+<div style="background-color: #dfffdf; padding: 10px; border-radius: 5px; line-height: 1.8;">
+<b>このアプリは以下の2つのモデルを用いて森林蓄積量を予測します:</b><br>
+1. **ロジスティック成長モデル**: 成長が一定の飽和点に収束する性質を持つモデル。<br>
+2. **多項式モデル**: 年齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。
 </div>
 """, unsafe_allow_html=True)
 
-st.write("""
-このアプリは、林齢（森林の年齢）に基づいて、1ヘクタールあたりの森林蓄積量（m³）を予測するためのツールです。
-主に以下の2つの予測モデルを使用します：
-""")
-
+# 使用手順を黒線で囲む
 st.markdown("""
-### **モデルの概要**
+<div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
+<b>使用手順:</b><br>
+1. **データ準備**: 森林データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）で準備してください。<br>
+2. **ファイルアップロード**: アプリのアップロード機能を使用してファイルを読み込みます。<br>
+3. **モデル選択**: ロジスティック成長モデルまたは多項式モデルを選択します。<br>
+4. **結果確認**: フィッティングされた数式、モデルの適合度（R²値）、信用区間、異常値の修正結果を表示します。<br>
+5. **データ保存**: 予測結果をCSV形式でダウンロード可能です。
+</div>
+""", unsafe_allow_html=True)
 
-1. **ロジスティック成長モデル**  
-   - **特性**: 初期成長が速く、その後成長率が低下し、最終的に一定の上限値（飽和点）に収束する性質を持つモデル。  
-   - **用途**: 長期的な森林の成長パターンを説明するのに適しています。
-
-2. **多項式モデル**  
-   - **特性**: 林齢に基づき滑らかに増加する森林蓄積量を2次多項式で近似。負の値が出ないよう非負制約を設定しています。  
-   - **用途**: 森林成長が単純な増加パターンを示す場合や、予測範囲が短期的な場合に適しています。
-""")
-
-# アプリの使い方
+# 補足情報と引用
 st.markdown("""
-### **アプリの使い方**
-
-1. **データ準備**  
-   - 森林のデータをExcelファイル形式（列名は `forest_age` と `volume_per_ha` 必須）で準備してください。
-   - `forest_age`: 森林の年齢（年単位）  
-   - `volume_per_ha`: 1ヘクタールあたりの蓄積量（m³）。
-
-2. **Excelファイルのアップロード**  
-   - アプリのアップロード機能を使い、準備したファイルを読み込みます。
-
-3. **予測モデルの選択**  
-   - ロジスティック成長モデルまたは多項式モデルを選択して予測を行います。
-
-4. **予測結果の確認**  
-   - **フィッティングされた数式**: データに基づく予測モデルの具体的な数式を表示します。  
-   - **適合度（R²値）**: モデルがデータにどれだけ適合しているかを評価します。  
-   - **信用区間**: 信頼性の高い予測範囲（90%）を提示します。  
-   - **異常値の検出と修正**: 予測結果の中で異常値が検出された場合は、自動で修正します。  
-   - **グラフ**: 観測データ、予測曲線、信用区間を可視化します。
-
-5. **予測結果の保存**  
-   - 予測結果をCSV形式でダウンロードして保存できます。
-""")
-
+---
+**引用:**
+DOI, Takumu (2024). *Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting*.
+""", unsafe_allow_html=True)
 # ロジスティック成長モデル
 def logistic_growth(age, K, r, A):
     """
