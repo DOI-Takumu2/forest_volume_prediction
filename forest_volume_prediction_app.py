@@ -116,7 +116,7 @@ if uploaded_file:
     # 結果を保存
     predictions_df = pd.DataFrame({
         "Forest Age": ages,
-        "Predicted Volume (Formula)": predicted_volume_formula,
+        "Predicted Volume": predicted_volume_formula,
         "Lower 90% CI": lower_90,
         "Upper 90% CI": upper_90
     })
