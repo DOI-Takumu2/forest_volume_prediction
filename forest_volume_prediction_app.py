@@ -139,6 +139,16 @@ if uploaded_file:
         equation = f"Volume = max(0, {a:.2f} * Age² + {b:.2f} * Age + {c:.2f})"
         lower_90, upper_90 = calculate_credible_interval(polynomial_model, popt, ages, max(forest_age), max(volume_per_ha), pcov)
 
+    # 数式をLaTeX形式で表示する
+if model_choice == "ロジスティック成長モデル (Logistic Growth Model)":
+    st.markdown("**数式:**")
+    st.latex(r"V = \frac{{K}}{{1 + A \cdot e^{-r \cdot \text{Age}}}}")
+    st.write(f"**係数:** K = {K:.2f}, r = {r:.4f}, A = {A:.2f}")
+else:
+    st.markdown("**数式:**")
+    st.latex(r"V = \max\left(0, a \cdot \text{Age}^2 + b \cdot \text{Age} + c\right)")
+    st.write(f"**係数:** a = {a:.2f}, b = {b:.2f}, c = {c:.2f}")
+    
     # 結果表示
     st.write("### フィッティング結果")
     st.write(f"**数式:** {equation}")
