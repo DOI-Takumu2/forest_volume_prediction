@@ -49,15 +49,15 @@ st.markdown("""
 <div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
 <b>使用手順:</b>
 <ol>
-    <li><b>データ準備</b>: データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）にて準備してください。
+    <li><b>データ準備</b>: Excelファイル（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）をご準備ください。
         <ul>
             <li><code>forest_age</code>: 林齢（樹木の年齢）（年単位）</li>
             <li><code>volume_per_ha</code>: 1ヘクタールあたりの蓄積量（m³）</li>
         </ul>
     </li>
-    <li><b>ファイルアップロード</b>: アプリのアップロード機能を使用してファイルを読み込みます。</li>
+    <li><b>ファイルアップロード</b></li>
     <li><b>モデル選択</b>: ロジスティック成長モデルまたは多項式モデルを選択します。</li>
-    <li><b>結果確認</b>: 以下の内容が表示されます:
+    <li><b>結果確認</b>: 以下が表示されます:
         <ul>
             <li><b>適合された数式</b>: データに基づく予測モデルの具体的な数式</li>
             <li><b>適合度（R²値）</b>: モデルがデータにどれだけ適合しているかを示す指標</li>
@@ -66,7 +66,7 @@ st.markdown("""
             <li><b>グラフ</b>: 観測データ、予測曲線、信用区間を視覚化します</li>
         </ul>
     </li>
-    <li><b>データ保存</b>: 予測結果をCSV形式でダウンロード可能です。</li>
+    <li><b>データ保存</b>: 予測結果をダウンロード可能です。</li>
 </ol>
 </div>
 """, unsafe_allow_html=True)
