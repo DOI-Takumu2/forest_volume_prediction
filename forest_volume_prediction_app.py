@@ -5,8 +5,6 @@ from scipy.optimize import curve_fit
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 
-import streamlit as st
-
 # Streamlitページの設定
 st.title("森林蓄積予測アプリ")
 
@@ -66,7 +64,7 @@ st.markdown("""
    予測結果をCSV形式でダウンロードして保存できます。
 """)
 
----
+
 ### **モデルの性質**
 
 #### **ロジスティック成長モデル**  
