@@ -5,19 +5,40 @@ from scipy.optimize import curve_fit
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 
-# Streamlitページの設定
-st.title("森林蓄積予測アプリ")
-
 import streamlit as st
 
 # Streamlitページの設定とカスタマイズ
 st.markdown("""
-<div style="text-align: center;">
-    <h1 style="margin-bottom: 0;">森林蓄積予測アプリ</h1>
-    <p style="margin-top: 5px; font-size: 18px;">森林管理と将来予測のためのツール</p>
-    <p style="margin-top: -5px; font-size: 14px; color: gray;">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
+<style>
+    .app-title {
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 36px;
+    }
+    .app-subtitle {
+        text-align: center;
+        margin-top: 5px;
+        font-size: 18px;
+    }
+    .app-subsubtitle {
+        text-align: center;
+        margin-top: -5px;
+        font-size: 14px;
+        color: gray;
+    }
+    .author-info {
+        text-align: right;
+        font-size: 12px;
+        margin-top: -10px;
+        color: black;
+    }
+</style>
+<div>
+    <h1 class="app-title">森林蓄積予測アプリ</h1>
+    <p class="app-subtitle">森林管理と将来予測のためのツール</p>
+    <p class="app-subsubtitle">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
 </div>
-<div style="text-align: right; font-size: 12px; margin-top: -10px;">
+<div class="author-info">
     製作者: 土居拓務（DOI, Takumu）
 </div>
 """, unsafe_allow_html=True)
