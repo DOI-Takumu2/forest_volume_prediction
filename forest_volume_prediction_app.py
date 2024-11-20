@@ -14,9 +14,7 @@ st.markdown("""
     <p style="margin-top: 5px; font-size: 18px;">森林管理と将来予測のためのツール</p>
     <p style="font-size: 12px; color: gray;">Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting.</p>
 </div>
-<div style="text-align: right; font-size: 16px; margin-top: -10px; font-weight: bold;">
-    製作者: 土居拓務（DOI, Takumu）
-</div>
+
 <hr style="margin-top: 10px;">
 """, unsafe_allow_html=True)
 
@@ -34,7 +32,7 @@ st.markdown("""
         </ul>
     </li>
     <li>
-        <b>多項式モデル</b>: 年齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。<br>
+        <b>多項式モデル</b>: 林齢に基づく蓄積量を2次多項式で滑らかに近似するモデル。<br>
         <ul>
             <li>シンプルな成長パターンを捉えつつ、非負制約で不自然な値を防ぎます。</li>
             <li>短期的な予測や直線的な増加パターンのモデリングに適しています。</li>
@@ -50,9 +48,9 @@ st.markdown("""
 <div style="border: 2px solid black; padding: 10px; margin: 10px; border-radius: 5px; line-height: 1.8;">
 <b>使用手順:</b>
 <ol>
-    <li><b>データ準備</b>: 森林データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）で準備してください。
+    <li><b>データ準備</b>: データをExcelファイル形式（列名は <code>forest_age</code> と <code>volume_per_ha</code> 必須）にて準備してください。
         <ul>
-            <li><code>forest_age</code>: 森林の年齢（年単位）</li>
+            <li><code>forest_age</code>: 林齢（樹木の年齢）（年単位）</li>
             <li><code>volume_per_ha</code>: 1ヘクタールあたりの蓄積量（m³）</li>
         </ul>
     </li>
@@ -60,7 +58,7 @@ st.markdown("""
     <li><b>モデル選択</b>: ロジスティック成長モデルまたは多項式モデルを選択します。</li>
     <li><b>結果確認</b>: 以下の内容が表示されます:
         <ul>
-            <li><b>フィッティングされた数式</b>: データに基づく予測モデルの具体的な数式</li>
+            <li><b>適合された数式</b>: データに基づく予測モデルの具体的な数式</li>
             <li><b>適合度（R²値）</b>: モデルがデータにどれだけ適合しているかを示す指標</li>
             <li><b>信用区間</b>: 信頼性の高い予測範囲（90%）を提示</li>
             <li><b>異常値の検出と修正</b>: 異常値が検出された場合、自動で修正します</li>
