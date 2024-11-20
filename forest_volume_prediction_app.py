@@ -5,7 +5,6 @@ from scipy.optimize import curve_fit
 from sklearn.metrics import r2_score
 import matplotlib.pyplot as plt
 
-# Streamlitページの設定
 import streamlit as st
 
 # Streamlitページの設定
@@ -24,10 +23,15 @@ st.markdown("""
 <div style="text-align: right; font-size: 14px; margin-top: -20px;">
     製作者：土居拓務（DOI, Takumu）
 </div>
-""", unsafe_allow_html=True
+""", unsafe_allow_html=True)
 
 st.write("""
-このアプリは、林齢（森林の年齢）に基づいて、1ヘクタールあたりの森林蓄積量（m³）を予測するためのツールです。主に以下の2つの予測モデルを使用します：
+このアプリは、林齢（森林の年齢）に基づいて、1ヘクタールあたりの森林蓄積量（m³）を予測するためのツールです。
+主に以下の2つの予測モデルを使用します：
+""")
+
+st.markdown("""
+### **モデルの概要**
 
 1. **ロジスティック成長モデル**  
    森林蓄積量が成長し、最終的に一定の上限に収束する性質を表現します。このモデルは、森林の成長が飽和点に近づく状況を説明するのに適しています。
@@ -60,6 +64,7 @@ st.markdown("""
 
 5. **予測結果の保存**  
    予測結果をCSV形式でダウンロードして保存できます。
+""")
 
 ---
 ### **モデルの性質**
