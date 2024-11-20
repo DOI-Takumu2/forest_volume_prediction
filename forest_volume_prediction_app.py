@@ -22,16 +22,11 @@ st.markdown("""
 st.markdown("""
 <div style="background-color: #dfffdf; padding: 10px; border-radius: 5px; line-height: 1.8;">
 <b>このアプリは以下の2つのモデルを用いて森林蓄積量を予測します:</b>
-<ol>
-    <li><b>ロジスティック成長モデル</b></li>
-    <li><b>多項式モデル</b></li>
-</ol>
-詳細は各モデルをクリックしてご覧ください。
 </div>
 """, unsafe_allow_html=True)
 
 # ロジスティック成長モデルの詳細
-with st.expander("1. ロジスティック成長モデルの詳細"):
+with st.expander("1. ロジスティック成長モデル"):
     st.write("""
     - **特性**: 初期成長が速く、その後成長率が低下し、最終的に飽和点に収束するモデルです。
     - **適用例**: 長期的な森林成長パターンを説明する際に適しています。
@@ -42,7 +37,7 @@ with st.expander("1. ロジスティック成長モデルの詳細"):
     """)
 
 # 多項式モデルの詳細
-with st.expander("2. 多項式モデルの詳細"):
+with st.expander("2. 多項式モデル"):
     st.write("""
     - **特性**: 林齢に基づく森林蓄積量を2次多項式で滑らかに近似するモデルです。
     - **適用例**: 短期的な予測やシンプルな成長パターンの説明に適しています。
