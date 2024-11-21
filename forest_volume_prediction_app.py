@@ -59,6 +59,13 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# 補足情報と引用
+st.markdown("""
+---
+**引用:**
+DOI, Takumu (2024). *Forest Volume Prediction App: A tool for sustainable forest management and growth forecasting*.
+""", unsafe_allow_html=True)
+
 # ロジスティック成長モデル
 def logistic_growth(age, K, r, A):
     return K / (1 + A * np.exp(-r * age))
